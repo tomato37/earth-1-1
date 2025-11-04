@@ -1,0 +1,394 @@
+<!doctype html>
+
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GreenBubble — 플라스틱 제로 캠페인</title>
+  <meta name="description" content="GreenBubble: 학생들이 만드는 플라스틱 제로 캠페인" />  <!-- Google Font -->  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">  <style>
+    :root{
+      --bg:#FBFEFF;
+      --card:#FFFFFF;
+      --muted:#6B7280;
+      --accent1:#2EB872; /* green */
+      --accent2:#90F0D0; /* soft */
+      --glass: rgba(255,255,255,0.6);
+      --max-width:1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      background: linear-gradient(180deg, #F6FFF8 0%, #F7FBFF 100%);
+      color:#0F172A;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      scroll-behavior:smooth;
+      line-height:1.5;
+    }
+
+    header{
+      position:fixed;left:0;right:0;top:0;z-index:60;
+      backdrop-filter: blur(6px);
+      background: linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0.55));
+      border-bottom:1px solid rgba(15,23,42,0.04);
+    }
+    .nav-wrap{max-width:var(--max-width);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;box-shadow:0 6px 20px rgba(46,184,114,0.16)}
+    .logo svg{width:26px;height:26px}
+    .site-title{font-weight:700}
+    .site-sub{font-size:12px;color:var(--muted);margin-top:2px}
+
+    nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0}
+    nav a{color:var(--muted);text-decoration:none;font-weight:600;font-size:14px}
+    nav a.active{color:var(--accent1)}
+
+    main{padding-top:84px}
+
+    /* Hero / Fullscreen sections */
+    section{min-height:100vh;display:flex;align-items:center;padding:64px 20px}
+    .container{max-width:var(--max-width);margin:0 auto;width:100%}
+
+    /* HERO */
+    .hero{
+      align-items:center;gap:48px;display:flex;flex-wrap:wrap;
+    }
+    .hero-left{flex:1 1 420px}
+    .hero-right{flex:1 1 420px;display:flex;align-items:center;justify-content:center}
+    .eyebrow{display:inline-block;background:linear-gradient(90deg,var(--accent2), #DFFAEA);padding:6px 10px;border-radius:999px;font-weight:700;font-size:13px;color:var(--accent1);}
+    h1{font-size:40px;margin:18px 0 8px;line-height:1.05}
+    p.lead{color:var(--muted);font-size:17px;margin-bottom:18px}
+    .cta-group{display:flex;gap:12px}
+    .btn{padding:12px 18px;border-radius:12px;border:0;font-weight:700;cursor:pointer}
+    .btn-primary{background:linear-gradient(90deg,var(--accent1),#1FA662);color:white;box-shadow:0 8px 30px rgba(46,184,114,0.14)}
+    .btn-ghost{background:transparent;border:1px solid rgba(15,23,42,0.06);color:var(--muted)}
+
+    /* Key activity highlight */
+    .feature-card{background:var(--card);border-radius:18px;padding:18px;box-shadow:0 8px 30px rgba(15,23,42,0.06);display:flex;gap:14px;align-items:center}
+    .feature-icon{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent2), #BFF7DF);display:flex;align-items:center;justify-content:center}
+
+    /* Blog style sections */
+    .section-title{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:18px}
+    .h2{font-size:22px;font-weight:700}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    .card{background:var(--card);border-radius:14px;padding:18px;box-shadow:0 6px 24px rgba(15,23,42,0.04)}
+    .card .meta{font-size:12px;color:var(--muted);margin-bottom:8px}
+    .card h3{margin:8px 0 6px}
+    .card p{color:var(--muted);font-size:14px}
+
+    /* Campaign participation form */
+    form.participate{display:grid;gap:12px;background:linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0.6));padding:20px;border-radius:14px;box-shadow:0 6px 24px rgba(15,23,42,0.04)}
+    input,textarea,select{padding:12px;border-radius:10px;border:1px solid rgba(15,23,42,0.06);font-size:14px}
+    textarea{min-height:120px;resize:vertical}
+    .small{font-size:13px;color:var(--muted)}
+
+    /* Footer */
+    footer{padding:28px 20px;background:transparent;border-top:1px dashed rgba(15,23,42,0.04)}
+    .footer-inner{max-width:var(--max-width);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .ownership{font-size:13px;color:var(--muted)}
+
+    /* Responsive */
+    @media (max-width:900px){
+      .grid{grid-template-columns:1fr}
+      h1{font-size:32px}
+      .hero{padding-top:12px}
+      nav ul{display:none}
+    }
+
+    /* subtle scroll animation */
+    .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+    .reveal.visible{opacity:1;transform:none}
+  </style></head>
+<body><header>
+  <div class="nav-wrap">
+    <div class="brand">
+      <div class="logo" aria-hidden>
+        <!-- simple water-drop + leaf icon -->
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+          <path d="M12 2C12 2 19 8 19 13.5C19 17.6421 15.6421 21 11.5 21C7.35786 21 4 17.6421 4 13.5C4 8 11 2 11 2" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M14 8C14 8 12.5 9.5 11 11" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div>
+        <div class="site-title">GreenBubble</div>
+        <div class="site-sub">플라스틱 제로 캠페인 — 충렬여고 1학년 1반</div>
+      </div>
+    </div><nav>
+  <ul>
+    <li><a href="#intro" class="active">소개</a></li>
+    <li><a href="#activity">핵심활동</a></li>
+    <li><a href="#participate">캠페인참여</a></li>
+    <li><a href="#news">뉴스 / 스토리</a></li>
+    <li><a href="#support">후원/문의</a></li>
+  </ul>
+</nav>
+
+  </div>
+</header><main>
+  <!-- INTRO / HERO -->
+  <section id="intro" class="reveal">
+    <div class="container hero">
+      <div class="hero-left">
+        <span class="eyebrow">학생 주도 • 지역과 함께</span>
+        <h1>GreenBubble — 작은 거품이<br>세상을 맑게 만든다</h1>
+        <p class="lead">학교와 지역사회의 일회용 플라스틱을 줄이기 위한 캠페인입니다. 실천 가능한 행동, 교육, 정기적인 정화 활동으로 지속 가능한 변화를 만듭니다.</p><div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+      <div class="feature-card" style="max-width:440px">
+        <div class="feature-icon" aria-hidden>
+          <!-- stylized bottle + sprout -->
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 21h8" stroke="#0F172A" stroke-opacity="0.6" stroke-linecap="round" stroke-width="1.4" />
+            <path d="M9 3h6v8a3 3 0 0 1-3 3 3 3 0 0 1-3-3V3z" stroke="#064C3B" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M14 8s1.5 1 2 2" stroke="#064C3B" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div>
+          <div style="font-weight:700">주요 활동</div>
+          <div class="small">학교와 지역사회의 일회용 플라스틱 줄이기 캠페인 운영</div>
+        </div>
+      </div>
+
+      <div class="cta-group">
+        <button class="btn btn-primary" onclick="scrollToSection('participate')">캠페인 참여하기</button>
+        <button class="btn btn-ghost" onclick="scrollToSection('news')">스토리 보기</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <!-- decorative mockup / blog style image -->
+    <div style="width:360px;max-width:86%;border-radius:20px;padding:18px;background:linear-gradient(180deg,#fff,#F6FFF8);box-shadow:0 16px 48px rgba(46,184,114,0.08)">
+      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='560'><rect width='100%' height='100%' rx='16' fill='%23EAFAF0'/><g fill='%230F172A' opacity='0.08'><rect x='40' y='40' width='700' height='20' rx='8'/><rect x='40' y='80' width='520' height='14' rx='7'/><rect x='40' y='110' width='640' height='14' rx='7'/><rect x='40' y='150' width='640' height='10' rx='6'/></g></svg>" alt="GreenBubble 대표 이미지" style="width:100%;border-radius:12px;display:block"/>
+    </div>
+  </div>
+</div>
+
+  </section>  <!-- 핵심활동 -->  <section id="activity" class="reveal">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <div class="h2">핵심활동</div>
+          <div class="small">학생들이 직접 기획하고 실행하는 프로젝트</div>
+        </div>
+        <div class="small">참여자 모집 · 정기 캠페인 · 교육 워크숍</div>
+      </div><div class="grid">
+    <article class="card">
+      <div class="meta">프로그램</div>
+      <h3>플라스틱 사용 추적 캠페인</h3>
+      <p>한 달간 학교 구성원의 일회용품 사용을 기록하고, 감소 목표를 세워 실천합니다. 결과는 인포그래픽으로 공유해요.</p>
+    </article>
+
+    <article class="card">
+      <div class="meta">봉사</div>
+      <h3>지역 하천 정화 활동</h3>
+      <p>학교와 연계해 정기적인 하천/공원 정화 활동을 운영합니다. 수거된 플라스틱은 분류 후 재활용 연계 파트너와 협력합니다.</p>
+    </article>
+
+    <article class="card">
+      <div class="meta">교육</div>
+      <h3>플라스틱 프리 워크숍</h3>
+      <p>청소년 대상 실천형 워크숍을 통해 대체품 사용법, 분리배출, 업사이클링을 교육합니다.</p>
+    </article>
+
+    <article class="card">
+      <div class="meta">연구</div>
+      <h3>학교 급식 잔반 & 용기 개선 제안</h3>
+      <p>급식 실태를 조사하고 학교 측에 정책 제안을 합니다. 학생 의견을 반영한 실용적 방안을 모색합니다.</p>
+    </article>
+  </div>
+</div>
+
+  </section>  <!-- 캠페인참여 -->  <section id="participate" class="reveal">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <div class="h2">캠페인 참여</div>
+          <div class="small">지금 바로 실천하고 목소리를 더해 주세요</div>
+        </div>
+        <div class="small">SNS 챌린지 · 봉사 신청 · 교내 캠페인 키트</div>
+      </div><div style="display:grid;grid-template-columns:1fr 360px;gap:18px">
+    <div>
+      <div class="card">
+        <h3>참여 방법</h3>
+        <p class="small">1) 개인 실천: 개인 텀블러/식기 사용, 포장 줄이기<br>2) 학교 실천: 급식 잔반 줄이기 운동, 분리수거 캠페인<br>3) 커뮤니티: 정화 활동 참여, 워크숍 참가</p>
+        <hr style="border:none;border-top:1px dashed rgba(15,23,42,0.06);margin:14px 0">
+        <p class="small">SNS에 #GreenBubble 캠페인 태그와 함께 실천 사진을 공유해 주세요. 월별 우수 참여자를 선정해 학교 게시판에 소개합니다.</p>
+      </div>
+
+      <div style="margin-top:16px" class="card">
+        <h3>챌린지 예시</h3>
+        <p class="small">"일주일 텀블러 챌린지" — 일회용 컵 대신 텀블러 사용 인증을 업로드하면 참여 완료!</p>
+      </div>
+    </div>
+
+    <aside>
+      <form class="participate" onsubmit="handleParticipation(event)">
+        <label class="small">이름<input type="text" id="p-name" placeholder="홍길동" required></label>
+        <label class="small">학교/반<input type="text" id="p-school" placeholder="충렬여고 1-1" required></label>
+        <label class="small">참여 유형
+          <select id="p-type">
+            <option>정화 활동</option>
+            <option>SNS 챌린지</option>
+            <option>워크숍 참가</option>
+          </select>
+        </label>
+        <label class="small">메시지<textarea id="p-msg" placeholder="캠페인에 남기고 싶은 말"></textarea></label>
+        <button class="btn btn-primary" type="submit">신청하기</button>
+        <div id="p-status" class="small" style="margin-top:6px;color:var(--muted)"></div>
+      </form>
+    </aside>
+  </div>
+</div>
+
+  </section>  <!-- 뉴스 / 스토리 -->  <section id="news" class="reveal">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <div class="h2">뉴스 / 스토리</div>
+          <div class="small">우리의 활동을 기록하고 공유합니다</div>
+        </div>
+        <div class="small">정기 리포트 · 참가자 인터뷰</div>
+      </div><div class="grid">
+    <article class="card">
+      <div class="meta">2025-09-10 · 현장스케치</div>
+      <h3>하천 정화: 함께 모아낸 120kg의 플라스틱</h3>
+      <p>지난 달 정화 활동에서 학생 45명이 참여해 120kg의 플라스틱을 수거했습니다. 분류 · 재활용 파트너와 연계해 처리했습니다.</p>
+    </article>
+
+    <article class="card">
+      <div class="meta">2025-08-18 · 캠페인</div>
+      <h3>텀블러 챌린지 1달간의 기록</h3>
+      <p>텀블러 사용률이 학교 내 평균 32%에서 58%로 증가했습니다. 작은 습관의 변화가 쌓여 만들어진 결과입니다.</p>
+    </article>
+
+    <article class="card">
+      <div class="meta">2025-06-30 · 인터뷰</div>
+      <h3>학생 리더 인터뷰: 왜 시작했나요?</h3>
+      <p>"우리가 사소한 것들을 바꾸면 주변도 변한다" — 학생 리더의 솔직한 이야기와 다음 목표를 전합니다.</p>
+    </article>
+
+    <article class="card">
+      <div class="meta">2025-05-14 · 가이드</div>
+      <h3>학교에서 실천할 수 있는 분리배출 팁</h3>
+      <p>간단히 따라 할 수 있는 분리배출 체크리스트와 교내 적용 방법을 소개합니다.</p>
+    </article>
+  </div>
+</div>
+
+  </section>  <!-- 후원 / 문의 -->  <section id="support" class="reveal">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <div class="h2">후원 / 문의</div>
+          <div class="small">함께해 주세요 — 자원, 현물, 멘토링 환영</div>
+        </div>
+        <div class="small">문의는 아래 양식 또는 학교 사무실로</div>
+      </div><div style="display:grid;grid-template-columns:1fr 320px;gap:18px;align-items:start">
+    <div>
+      <div class="card">
+        <h3>후원 안내</h3>
+        <p class="small">작은 후원도 큰 힘이 됩니다. 캠페인 키트, 교육 자료, 정화 활동용 장비 후원을 받고 있습니다. (학교 내 통합 관리)</p>
+        <p class="small"><strong>계좌:</strong> 충렬여고 학생자치회 (예시 계좌)</p>
+        <hr style="border:none;border-top:1px dashed rgba(15,23,42,0.06);margin:12px 0">
+        <p class="small">기업/단체 협업 문의는 멘토링 및 재활용 파트너십을 통해 진행합니다.</p>
+      </div>
+
+      <div style="margin-top:14px" class="card">
+        <h3>문의 이메일</h3>
+        <p class="small">greenbubble@school.example (예시)</p>
+      </div>
+    </div>
+
+    <aside class="card">
+      <h3>메시지 보내기</h3>
+      <form onsubmit="handleContact(event)">
+        <label class="small">이름<input id="c-name" required></label>
+        <label class="small">이메일<input id="c-email" type="email" required></label>
+        <label class="small">내용<textarea id="c-msg" required></textarea></label>
+        <button class="btn btn-primary" type="submit">보내기</button>
+        <div id="c-status" class="small" style="margin-top:8px;color:var(--muted)"></div>
+      </form>
+    </aside>
+  </div>
+</div>
+
+  </section>
+</main><footer>
+  <div class="footer-inner">
+    <div>
+      <strong>GreenBubble</strong>
+      <div class="small">플라스틱 제로 캠페인 — 학생 주도 프로젝트</div>
+    </div>
+    <div class="ownership">이 홈페이지의 지적 소유권은 <strong>충렬여고 1학년 1반</strong>에게 있다.</div>
+  </div>
+</footer><script>
+  // smooth reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+      }
+    })
+  },{threshold:0.12});
+  reveals.forEach(r=>io.observe(r));
+
+  // scroll-to helper
+  function scrollToSection(id){
+    const el = document.getElementById(id);
+    if(!el) return;
+    const y = el.getBoundingClientRect().top + window.scrollY - 72; // account for fixed header
+    window.scrollTo({top:y,behavior:'smooth'});
+  }
+
+  // nav active state
+  const navLinks = document.querySelectorAll('nav a');
+  function highlightNav(){
+    const fromTop = window.scrollY + 90;
+    navLinks.forEach(link=>{
+      const section = document.querySelector(link.getAttribute('href'));
+      if(!section) return;
+      if(section.offsetTop <= fromTop && (section.offsetTop + section.offsetHeight) > fromTop){
+        link.classList.add('active');
+      } else link.classList.remove('active');
+    })
+  }
+  window.addEventListener('scroll', highlightNav);
+  highlightNav();
+
+  // participation form (demo only)
+  function handleParticipation(e){
+    e.preventDefault();
+    const name = document.getElementById('p-name').value.trim();
+    const school = document.getElementById('p-school').value.trim();
+    const type = document.getElementById('p-type').value;
+    const msg = document.getElementById('p-msg').value.trim();
+    document.getElementById('p-status').textContent = `${name}님, 참여 신청이 접수되었습니다. (데모)`;
+    e.target.reset();
+  }
+
+  function handleContact(e){
+    e.preventDefault();
+    const name = document.getElementById('c-name').value.trim();
+    const email = document.getElementById('c-email').value.trim();
+    const msg = document.getElementById('c-msg').value.trim();
+    document.getElementById('c-status').textContent = '메시지가 전송되었습니다. (데모)';
+    e.target.reset();
+  }
+
+  // basic form validation check (ensures no scripted errors)
+  (function verify(){
+    if(!document.querySelector('header') || !document.querySelector('main')){
+      console.warn('중요: 주요 구조가 누락되었습니다.');
+    }
+    // ensure all anchors point to existing sections
+    document.querySelectorAll('nav a').forEach(a=>{
+      const id = a.getAttribute('href').slice(1);
+      if(!document.getElementById(id)){
+        console.warn('네비게이션 링크 점검: '+id);
+      }
+    })
+  })();
+</script></body>
+</html>
